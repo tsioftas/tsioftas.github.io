@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy policy — Щасливої Дороги</title>
+<style>
+  :root { color-scheme: light dark; --fg: #1d1d1b; --bg: #fbf8f1; --muted: #6b6760; --link: #0057b7; }
+  @media (prefers-color-scheme: dark) {
+    :root { --fg: #ece8df; --bg: #1a1a18; --muted: #a39f96; --link: #ffd700; }
+  }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font: 17px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 42rem; margin: 0 auto; padding: 2.5rem 16px 4rem; }
+  h1 { font-size: 1.6rem; line-height: 1.25; }
+  h2 { font-size: 1.15rem; margin-top: 2rem; }
+  a { color: var(--link); }
+  hr { border: 0; border-top: 1px solid var(--muted); margin: 2.5rem 0 1.5rem; }
+  hr ~ p { color: var(--muted); font-size: 0.9rem; }
+  code { font-size: 0.9em; }
+</style>
+</head>
+<body>
+<main>
+<h1>Privacy policy — Щасливої Дороги</h1>
+<p><em>Last updated: 5 October 2026.</em></p>
+<p><strong>The game itself collects nothing about you. The one advert in it is shown by
+Google, and Google does.</strong></p>
+<h2>The advert</h2>
+<p>After a crash the game may offer a second chance in return for watching a
+video advertisement. It is only ever offered, never shown unasked, and turning
+it down costs you nothing but the run.</p>
+<p>That advert is served by <strong>Google AdMob</strong>. To choose and show one, and to count
+that it was shown, Google's SDK in the game uses your device's <strong>advertising
+ID</strong>, your IP address, and basic information about the device and the app.
+How Google uses that is described at
+<a href="https://policies.google.com/technologies/partner-sites">https://policies.google.com/technologies/partner-sites</a>.</p>
+<p>If you are in the European Economic Area, the United Kingdom or Switzerland,
+the game asks for your consent through Google's own form before any advert is
+requested, and works fully whatever you answer. You can change your answer at
+any time under <em>Settings → Ad privacy</em> in the game. You can reset or delete your
+advertising ID at any time in Android's settings (<em>Settings → Privacy → Ads</em>).</p>
+<p>For the advert, Google's SDK asks Android for network access (<code>INTERNET</code>,
+<code>ACCESS_NETWORK_STATE</code>), for the advertising ID (<code>AD_ID</code>), for basic phone
+state (<code>READ_BASIC_PHONE_STATE</code> — such as the type of mobile network and the
+software version; not your calls, contacts or number), and to do its own work in the background (<code>WAKE_LOCK</code>,
+<code>FOREGROUND_SERVICE</code>). These are all granted at install without a prompt; the
+game asks for nothing else, and nothing that would show you one.</p>
+<h2>What is stored, and where</h2>
+<p>Your progress — your best run, the money you have banked, the car you drive, the
+finales you have collected, the settings you have chosen — is written to a file
+in the game's own private storage on your device. Nobody but the game can read
+it, and it is never sent anywhere. Uninstalling the game deletes it.</p>
+<p>The game has no account, no sign-in, no purchases and no analytics.</p>
+<h2>Children</h2>
+<p>The game is made for a general audience and is not directed at children.</p>
+<h2>Contact</h2>
+<p>Questions about this policy: <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#112;&#97;&#110;&#97;&#101;&#118;&#114;&#105;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">&#112;&#97;&#110;&#97;&#101;&#118;&#114;&#105;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a></p>
+<hr />
+<p><em>A note on how this is kept true rather than merely stated: the game's own code
+contains no HTTP, socket or WebSocket call — the network is used only by
+Google's SDK, which is confined to <code>src/AdMob.gd</code> and loaded on Android only.
+The permissions the SDK brings are pinned by a test (<code>tests/test_adverts.gd</code>)
+and by the build script, which refuses to produce a build that asks for any
+permission not listed in <code>store/permissions.txt</code>. The development
+telemetry that records a run to a local file only runs in a debug build —
+<code>Telemetry.enabled</code> is <code>OS.is_debug_build()</code>, and the copy on Google Play is
+not one.</em></p>
+</main>
+</body>
+</html>
