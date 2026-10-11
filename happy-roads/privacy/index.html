@@ -23,9 +23,11 @@
 <body>
 <main>
 <h1>Privacy policy — Щасливої Дороги</h1>
-<p><em>Last updated: 5 October 2026.</em></p>
-<p><strong>The game itself collects nothing about you. The one advert in it is shown by
-Google, and Google does.</strong></p>
+<p><em>Last updated: 10 October 2026.</em></p>
+<p><strong>The game collects nothing that identifies you. It sends a summary of how
+each run and each session of play went, under a random number made for your
+copy of the game, so the game can be balanced and improved. The one advert in
+it is shown by Google, and Google does collect data about you.</strong></p>
 <h2>The advert</h2>
 <p>After a crash the game may offer a second chance in return for watching a
 video advertisement. It is only ever offered, never shown unasked, and turning
@@ -46,26 +48,61 @@ state (<code>READ_BASIC_PHONE_STATE</code> — such as the type of mobile networ
 software version; not your calls, contacts or number), and to do its own work in the background (<code>WAKE_LOCK</code>,
 <code>FOREGROUND_SERVICE</code>). These are all granted at install without a prompt; the
 game asks for nothing else, and nothing that would show you one.</p>
+<h2>How the game is played</h2>
+<p>So we can see how the game is really played and improve it, it sends two kinds
+of summary to a server of our own:</p>
+<p><strong>When a run ends</strong>, a summary of the run:</p>
+<ul>
+<li>how far you drove, for how long, and what ended the run;</li>
+<li>the money earned, paid out and fined in the game;</li>
+<li>the passengers you carried and how their mood went;</li>
+<li>the car, its parts and the companions in it;</li>
+<li>how smoothly the game ran (frame times), and the device it ran on: its
+  model, operating system, graphics chip, screen size and refresh rate.</li>
+</ul>
+<p><strong>When you leave the game</strong> (it closes or goes to the background), a summary of
+that session:</p>
+<ul>
+<li>how long you spent on each screen, and which buttons you pressed;</li>
+<li>how many runs you started and how they ended, including a run you left
+  unfinished and how far it had got;</li>
+<li>whether the advert was offered and taken, and what you bought in the garage;</li>
+<li>where you stand overall: distance driven, money, endings collected, legs of
+  the journey done, the car, parts and companions you have, your language and
+  sound settings, and how many times you have started the game.</li>
+</ul>
+<p>Each summary carries the day (the date only, not the time) and a <strong>random
+number made the first time you start the game</strong>. It is kept with your progress
+on your device, and lets us tell how one copy of the game is played over time:
+whether people come back, and where they stop. It is not your name, account,
+phone number, device ID or advertising ID, and it is tied to none of them.
+Uninstalling the game deletes it; a new install gets a new one. No location is
+sent. Your IP address reaches the server only because every message on the
+internet carries one; it is not stored or logged.</p>
+<p>Summaries are kept on Cloudflare's servers (Cloudflare Workers and D1), are not
+shared with or sold to anyone, and are used for nothing but improving the game.
+We collect them in our legitimate interest in making the game work well; if
+you object, write to the address below. A summary made offline is sent the
+next time the device is online.</p>
 <h2>What is stored, and where</h2>
 <p>Your progress — your best run, the money you have banked, the car you drive, the
 finales you have collected, the settings you have chosen — is written to a file
 in the game's own private storage on your device. Nobody but the game can read
 it, and it is never sent anywhere. Uninstalling the game deletes it.</p>
-<p>The game has no account, no sign-in, no purchases and no analytics.</p>
+<p>The game has no account, no sign-in and no purchases.</p>
 <h2>Children</h2>
 <p>The game is made for a general audience and is not directed at children.</p>
 <h2>Contact</h2>
 <p>Questions about this policy: <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#112;&#97;&#110;&#97;&#101;&#118;&#114;&#105;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">&#112;&#97;&#110;&#97;&#101;&#118;&#114;&#105;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a></p>
 <hr />
 <p><em>A note on how this is kept true rather than merely stated: the game's own code
-contains no HTTP, socket or WebSocket call — the network is used only by
-Google's SDK, which is confined to <code>src/AdMob.gd</code> and loaded on Android only.
-The permissions the SDK brings are pinned by a test (<code>tests/test_adverts.gd</code>)
-and by the build script, which refuses to produce a build that asks for any
-permission not listed in <code>store/permissions.txt</code>. The development
-telemetry that records a run to a local file only runs in a debug build —
-<code>Telemetry.enabled</code> is <code>OS.is_debug_build()</code>, and the copy on Google Play is
-not one.</em></p>
+makes one kind of network call, in <code>src/Uplink.gd</code>, which sends the run and
+session summaries above and nothing else. Everything else on the network is Google's
+SDK, confined to <code>src/AdMob.gd</code> and loaded on Android only. The permissions the
+SDK brings are pinned by a test (<code>tests/test_adverts.gd</code>) and by the build
+script, which refuses to produce a build that asks for any permission not
+listed in <code>store/permissions.txt</code>. The server that receives the summaries is
+in <code>server/usage/</code>: it stores each one and keeps nothing about the sender.</em></p>
 </main>
 </body>
 </html>
